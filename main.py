@@ -167,17 +167,16 @@ class ProxyClient:
 
 
 def main():
-    model = "openai/gpt-oss-120b"
     prompt = "hi"
 
     if len(sys.argv) >= 2:
         prompt = sys.argv[1]
-    if len(sys.argv) >= 3:
-        model = sys.argv[2]
 
     try:
-        ProxyClient().chat(prompt, model)
-        return 0
+        if len(sys.argv) >= 3:
+            ProxyClient().chat(prompt, sys.argv[2])
+        else:
+            ProxyClient().chat(prompt)
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
         return 1
